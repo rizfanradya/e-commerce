@@ -15,7 +15,7 @@ export default async function CardProduct() {
   return products.map((product) => (
     <div
       key={product.id}
-      className="w-40 rounded-lg bg-slate-800 overflow-hidden"
+      className="w-36 rounded-lg bg-slate-800 overflow-hidden"
     >
       <div className="h-36 flex flex-col items-center justify-center overflow-hidden">
         <Image
