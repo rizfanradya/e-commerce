@@ -1,8 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 
 async function getData() {
-  const res = await fetch("https://fakestoreapi.com/products?limit=10");
+  const res = await fetch("https://fakestoreapi.com/products?limit=20");
   if (!res.ok) {
     throw new error("gagal fetch");
   }
@@ -14,15 +13,13 @@ export default async function CardProduct() {
   const sizeImage = 200;
 
   return products.map((product) => (
-    <Link
+    <div
       key={product.id}
-      href={"./cart"}
       className="w-40 rounded-lg bg-slate-800 overflow-hidden"
     >
-      <div className="h-36 w-full overflow-hidden">
+      <div className="h-36 flex flex-col items-center justify-center overflow-hidden">
         <Image
           key={product.id}
-          className="w-full"
           src={product.image}
           alt={product.title}
           width={sizeImage}
@@ -33,6 +30,6 @@ export default async function CardProduct() {
         <p className="text-xs font-medium text-slate-300">{product.title}</p>
         <p className="font-medium text-sm">Rp {product.price}</p>
       </div>
-    </Link>
+    </div>
   ));
 }
