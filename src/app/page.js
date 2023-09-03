@@ -10,18 +10,18 @@ export default async function Home() {
   return (
     <>
       <title>Home</title>
-      <div className="mt-7 mb-14 p-6">
+      <div className="mt-7 mb-14 pt-6 px-3">
         <h1 className="mb-2 py-1 px-3 rounded-md font-bold text-xl bg-slate-800">
           Fake Store API
         </h1>
-        <div className="flex flex-wrap gap-4 justify-center">
+        <div className="flex flex-wrap gap-2 bg-slate-700">
           {products.map((product) => (
             <Link
+              className="w-44 rounded-lg bg-slate-800 overflow-hidden h-min"
               href={`/${product.id}`}
               key={product.id}
-              className="w-36 rounded-lg bg-slate-800 overflow-hidden"
             >
-              <div className="h-36 flex flex-col items-center justify-center overflow-hidden">
+              <div className="flex flex-col items-center justify-center overflow-hidden max-h-40">
                 <Image
                   key={product.id}
                   src={product.image}
@@ -30,7 +30,7 @@ export default async function Home() {
                   height={sizeImage}
                 />
               </div>
-              <div className="m-3 flex flex-col gap-2">
+              <div className="m-2 flex flex-col gap-3">
                 <p className="text-xs font-medium text-slate-300">
                   {product.title}
                 </p>
