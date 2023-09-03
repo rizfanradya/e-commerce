@@ -1,13 +1,33 @@
-import ListItem from "@/app/components/navbarList";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function NavbarBottom() {
+export default async function NavbarBottom() {
+  const sizeIcon = 26;
+  const listItems = [
+    { href: "", name: "home" },
+    { href: "category", name: "category" },
+    { href: "cart", name: "cart" },
+    { href: "profile", name: "profile" },
+  ];
+
   return (
     <div className="bg-indigo-500 w-screen h-11 bottom-0 fixed lg:hidden">
       <ul className="h-full flex gap-4 justify-around items-center">
-        <ListItem href="/" name="home" />
-        <ListItem href="/category" name="category" />
-        <ListItem href="/cart" name="cart" />
-        <ListItem href="/profile" name="profile" />
+        {listItems.map((listItem) => (
+          <li key={listItem.name}>
+            <Link
+              href={`/${listItem.href}`}
+              className="hover:text-slate-400 transition"
+            >
+              <Image
+                src={`/navbarIcon/${listItem.name}.svg`}
+                alt={listItem.name}
+                width={sizeIcon}
+                height={sizeIcon}
+              />
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
