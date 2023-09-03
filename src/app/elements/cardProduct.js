@@ -1,27 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CardProduct() {
-  return (
+async function getData() {
+  const res = await fetch("https://fakestoreapi.com/products?limit=5");
+  if (!res.ok) {
+    throw new error("gagal fetch");
+  }
+  return res.json();
+}
+
+export default async function CardProduct() {
+  const products = await getData();
+  const sizeImage = 100;
+
+  return products.map((product) => (
     <Link
+      key={product.id}
       href={"./cart"}
-      className="w-40 h-52 rounded-lg bg-slate-800 overflow-hidden"
+      className="w-40 rounded-lg bg-slate-800 overflow-hidden"
     >
-      <div className="h-28 w-full overflow-hidden">
-        <img
+      <div className="h-40 w-full overflow-hidden">
+        <Image
+          key={product.id}
           className="w-full"
-          src="https://source.unsplash.com/random"
-          alt="product"
-          width={50}
-          height={50}
+          src={product.image}
+          alt={product.title}
+          width={sizeImage}
+          height={sizeImage}
         />
       </div>
-      <div className="m-3">
-        <p className="text-xs pb-1 text-slate-300">
-          Lorem ipsum dolor sit amet consectetur lor...
-        </p>
-        <p className="font-medium text-sm">Rp 1.350.000</p>
+      <div className="m-3 flex flex-col gap-2">
+        <p className="text-xs font-medium text-slate-300">{product.title}</p>
+        <p className="font-medium text-sm">Rp {product.price}</p>
       </div>
     </Link>
-  );
+  ));
 }
