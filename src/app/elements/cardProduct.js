@@ -1,18 +1,13 @@
+import axios from "axios";
 import Image from "next/image";
 
-async function getData() {
-  const res = await fetch("https://fakestoreapi.com/products?limit=20");
-  if (!res.ok) {
-    throw new error("gagal fetch");
-  }
-  return res.json();
-}
-
 export default async function CardProduct() {
-  const products = await getData();
+  const { data } = await axios.get(
+    "https://fakestoreapi.com/products?limit=20"
+  );
   const sizeImage = 200;
 
-  return products.map((product) => (
+  return data.map((product) => (
     <div
       key={product.id}
       className="w-36 rounded-lg bg-slate-800 overflow-hidden"
