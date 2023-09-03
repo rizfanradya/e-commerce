@@ -12,6 +12,7 @@ async function getData() {
 export default async function CardProduct() {
   const products = await getData();
   const sizeImage = 100;
+  console.log(products);
 
   return products.map((product) => (
     <Link
