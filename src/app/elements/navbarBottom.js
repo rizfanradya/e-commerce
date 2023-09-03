@@ -20,7 +20,7 @@ export default async function NavbarBottom() {
               className="hover:text-slate-400 transition"
             >
               <Image
-                src={`/navbarIcon/${listItem.name}.svg`}
+                src={`/${listItem.name}.svg`}
                 alt={listItem.name}
                 width={sizeIcon}
                 height={sizeIcon}

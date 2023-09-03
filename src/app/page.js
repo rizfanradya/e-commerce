@@ -35,6 +35,27 @@ export default async function Home() {
                   {product.title}
                 </p>
                 <p className="font-medium text-sm">Rp {product.price}</p>
+
+                <div className="flex justify-around">
+                  <Link
+                    href={"/cart"}
+                    className="border p-2 rounded-full hover:bg-indigo-500 transition"
+                  >
+                    <Image src={"cart.svg"} alt="cart" width={16} height={16} />
+                  </Link>
+
+                  <Link
+                    href={"/cart"}
+                    className="border p-2 rounded-full hover:bg-indigo-500 transition"
+                  >
+                    <Image
+                      src={"love.svg"}
+                      alt="wishlist"
+                      width={16}
+                      height={16}
+                    />
+                  </Link>
+                </div>
               </div>
             </Link>
           ))}
