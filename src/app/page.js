@@ -1,6 +1,12 @@
-import CardProduct from "@/app/elements/cardProduct";
+import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const getDataProduct = await axios.get("https://fakestoreapi.com/products");
+  const products = getDataProduct.data;
+  const sizeImage = 200;
+
   return (
     <>
       <title>Home</title>
@@ -9,7 +15,29 @@ export default function Home() {
           Fake Store API
         </h1>
         <div className="flex flex-wrap gap-5 justify-center">
-          <CardProduct />
+          {products.map((product) => (
+            <Link
+              href={`/${product.id}`}
+              key={product.id}
+              className="w-36 rounded-lg bg-slate-800 overflow-hidden"
+            >
+              <div className="h-36 flex flex-col items-center justify-center overflow-hidden">
+                <Image
+                  key={product.id}
+                  src={product.image}
+                  alt={product.title}
+                  width={sizeImage}
+                  height={sizeImage}
+                />
+              </div>
+              <div className="m-3 flex flex-col gap-2">
+                <p className="text-xs font-medium text-slate-300">
+                  {product.title}
+                </p>
+                <p className="font-medium text-sm">Rp {product.price}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </>
