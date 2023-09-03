@@ -20,7 +20,7 @@ export default async function CardProduct() {
       href={"./cart"}
       className="w-40 rounded-lg bg-slate-800 overflow-hidden"
     >
-      <div className="h-40 w-full overflow-hidden">
+      <div className="h-36 w-full overflow-hidden">
         <Image
           key={product.id}
           className="w-full"
