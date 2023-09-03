@@ -14,7 +14,7 @@ export default async function Home() {
         <h1 className="mb-2 py-1 px-3 rounded-md font-bold text-xl bg-slate-800">
           Fake Store API
         </h1>
-        <div className="flex flex-wrap gap-5 justify-center">
+        <div className="flex flex-wrap gap-4 justify-center">
           {products.map((product) => (
             <Link
               href={`/${product.id}`}
@@ -35,15 +35,13 @@ export default async function Home() {
                   {product.title}
                 </p>
                 <p className="font-medium text-sm">Rp {product.price}</p>
-
                 <div className="flex justify-around">
                   <Link
                     href={"/cart"}
                     className="border p-2 rounded-full hover:bg-indigo-500 transition"
                   >
-                    <Image src={"cart.svg"} alt="cart" width={16} height={16} />
+                    <Image src={"cart.svg"} alt="cart" width={14} height={14} />
                   </Link>
-
                   <Link
                     href={"/cart"}
                     className="border p-2 rounded-full hover:bg-indigo-500 transition"
@@ -51,10 +49,17 @@ export default async function Home() {
                     <Image
                       src={"love.svg"}
                       alt="wishlist"
-                      width={16}
-                      height={16}
+                      width={14}
+                      height={14}
                     />
                   </Link>
+                </div>
+                <div className="flex gap-1 text-xs font-thin">
+                  <Image src={"/star.svg"} alt="star" width={16} height={16} />
+                  <p>{product.rating.rate}</p>
+                  <span>|</span>
+                  <p>{product.rating.count}</p>
+                  <p>terjual</p>
                 </div>
               </div>
             </Link>
