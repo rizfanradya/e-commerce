@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getData() {
-  const res = await fetch("https://fakestoreapi.com/products?limit=5");
+  const res = await fetch("https://fakestoreapi.com/products?limit=10");
   if (!res.ok) {
     throw new error("gagal fetch");
   }
