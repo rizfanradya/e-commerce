@@ -9,8 +9,9 @@ export default function ProfilePage() {
       <title>Profile</title>
       <div className="my-12 w-11/12 m-auto flex flex-col items-center gap-4">
         <div className="w-full h-40 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 p-5 flex items-center gap-4">
-          <div className="bg-slate-400 w-20 h-20 rounded-full overflow-hidden">
+          <div className="w-20 h-20 rounded-full overflow-hidden">
             <Image
+              className="h-full"
               src={"/profile.jpg"}
               alt="profile"
               width={sizeImage}
