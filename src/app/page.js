@@ -44,7 +44,7 @@ export default async function Home() {
                     ? product.title
                     : `${product.title.slice(0, 29)} ...`}
                 </p>
-                <p className="font-medium text-sm">
+                <p className="font-medium text-sm tracking-wide">
                   Rp {convertToRupiah(product.price)}
                 </p>
                 <div className="flex justify-around">
