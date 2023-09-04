@@ -1,19 +1,22 @@
 import axios from "axios";
+import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
+import { db } from "./firebase";
 
 export default async function Home() {
   const sizeImage = 200;
   const fakeStoreApi = await axios.get("https://fakestoreapi.com/products");
-  const exchangeRatesApi = await axios.get(
-    "http://api.exchangeratesapi.io/v1/latest?access_key=fbaf0dbf41e35f9d2df23b79a25c8c33"
-  );
   const products = fakeStoreApi.data;
-  const rupiah = exchangeRatesApi.data.rates.IDR;
   const convertToRupiah = (dollar) => {
-    const priceInRupiah = dollar * rupiah;
+    const priceInRupiah = dollar * 15000;
     return priceInRupiah.toLocaleString("id-ID");
   };
+
+  const querySnapshot = await getDocs(collection(db, "test"));
+  querySnapshot.forEach((doc) => {
+    console.log(doc.data());
+  });
 
   return (
     <>
