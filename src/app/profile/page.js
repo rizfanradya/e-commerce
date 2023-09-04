@@ -11,7 +11,7 @@ export default function ProfilePage() {
         <div className="w-full h-40 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 p-5 flex items-center gap-4">
           <div className="bg-slate-400 w-20 h-20 rounded-full overflow-hidden">
             <Image
-              src={"/profile.png"}
+              src={"/profile.jpg"}
               alt="profile"
               width={sizeImage}
               height={sizeImage}

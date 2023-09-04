@@ -3,27 +3,35 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-  const getDataProduct = await axios.get("https://fakestoreapi.com/products");
-  const products = getDataProduct.data;
   const sizeImage = 200;
-  const rupiah = 15000;
+  const fakeStoreApi = await axios.get("https://fakestoreapi.com/products");
+  const exchangeRatesApi = await axios.get(
+    "http://api.exchangeratesapi.io/v1/latest?access_key=fbaf0dbf41e35f9d2df23b79a25c8c33"
+  );
+  const products = fakeStoreApi.data;
+  const rupiah = exchangeRatesApi.data.rates.IDR;
   const convertToRupiah = (dollar) => {
     const priceInRupiah = dollar * rupiah;
     return priceInRupiah.toLocaleString("id-ID");
   };
 
+  function handleClick() {
+    alert("Hello World");
+  }
+
   return (
     <>
       <title>Home</title>
+      <div className="absolute hidden modalbox">Modal Box</div>
       <div className="mt-7 mb-14 pt-6 px-3">
         <h1 className="mb-2 py-1 px-3 rounded-md font-bold text-xl bg-slate-800">
           Fake Store API
         </h1>
         <div className="flex flex-wrap gap-2 justify-around">
           {products.map((product) => (
-            <Link
-              className="w-36 rounded-lg bg-slate-800 overflow-hidden"
-              href={`/${product.id}`}
+            <div
+              onClick={handleClick}
+              className="w-36 rounded-lg bg-slate-800 overflow-hidden cursor-pointer"
               key={product.id}
             >
               <div className="h-40 flex flex-col bg-slate-700 items-center justify-center overflow-hidden">
@@ -44,7 +52,7 @@ export default async function Home() {
                     ? product.title
                     : `${product.title.slice(0, 29)} ...`}
                 </p>
-                <p className="font-medium text-sm tracking-wide">
+                <p className="font-medium text-sm">
                   Rp {convertToRupiah(product.price)}
                 </p>
                 <div className="flex justify-around">
@@ -74,7 +82,7 @@ export default async function Home() {
                   <p>terjual</p>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
