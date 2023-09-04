@@ -26,9 +26,9 @@ export default function ProfilePage() {
 
         <Link
           className="text-sky-500 transition border font-medium rounded-full py-2 px-14 hover:bg-sky-500 hover:text-slate-900"
-          href={"./login"}
+          href={"/"}
         >
-          Login
+          Login With Google
         </Link>
       </div>
     </>

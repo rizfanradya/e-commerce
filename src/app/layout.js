@@ -1,7 +1,7 @@
-import NavbarBottom from "./elements/navbarBottom";
-import NavbarTop from "./elements/navbarTop";
+import Link from "next/link";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,12 +11,69 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const sizeIcon = 26;
+  const listItems = [
+    { href: "", name: "home" },
+    { href: "category", name: "category" },
+    { href: "cart", name: "cart" },
+    { href: "profile", name: "profile" },
+  ];
+
   return (
     <html lang="en" className="bg-slate-900 text-slate-200 scroll-smooth  ">
       <body className={inter.className}>
-        <NavbarTop />
+        <div className="bg-indigo-500 fixed top-0 w-screen p-2 flex justify-around">
+          <Link className="font-bold text-xl" href={"/"}>
+            Toko Online
+          </Link>
+          <input
+            className="w-2/5 h-7 rounded-full px-2 text-slate-800"
+            placeholder="Search"
+            name="search"
+            autoComplete="off"
+          />
+          <div>
+            <ul className="lg:flex gap-6 hidden">
+              {listItems.map((listItem) => (
+                <li key={listItem.name}>
+                  <Link
+                    href={`/${listItem.href}`}
+                    className="hover:text-slate-400 transition"
+                  >
+                    <Image
+                      src={`/${listItem.name}.svg`}
+                      alt={listItem.name}
+                      width={sizeIcon}
+                      height={sizeIcon}
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         {children}
-        <NavbarBottom />
+
+        <div className="bg-indigo-500 w-screen h-11 bottom-0 fixed lg:hidden">
+          <ul className="h-full flex gap-4 justify-around items-center">
+            {listItems.map((listItem) => (
+              <li key={listItem.name}>
+                <Link
+                  href={`/${listItem.href}`}
+                  className="hover:text-slate-400 transition"
+                >
+                  <Image
+                    src={`/${listItem.name}.svg`}
+                    alt={listItem.name}
+                    width={sizeIcon}
+                    height={sizeIcon}
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </body>
     </html>
   );
