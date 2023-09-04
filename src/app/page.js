@@ -16,6 +16,7 @@ export default async function Home() {
   const querySnapshot = await getDocs(collection(db, "test"));
   querySnapshot.forEach((doc) => {
     console.log(doc.data());
+    return doc.data();
   });
 
   return (

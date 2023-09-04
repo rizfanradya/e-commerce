@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-slate-900 text-slate-200 scroll-smooth  ">
       <body className={inter.className}>
+        {/* navbar top start */}
         <div className="bg-indigo-500 fixed top-0 w-screen p-2 flex justify-around">
           <Link className="font-bold text-xl" href={"/"}>
             Toko Online
@@ -52,9 +53,11 @@ export default function RootLayout({ children }) {
             </ul>
           </div>
         </div>
+        {/* navbar top end */}
 
         {children}
 
+        {/* navbar bottom start */}
         <div className="bg-indigo-500 w-screen h-11 bottom-0 fixed lg:hidden">
           <ul className="h-full flex gap-4 justify-around items-center">
             {listItems.map((listItem) => (
@@ -74,6 +77,7 @@ export default function RootLayout({ children }) {
             ))}
           </ul>
         </div>
+        {/* navbar bottom end */}
       </body>
     </html>
   );
