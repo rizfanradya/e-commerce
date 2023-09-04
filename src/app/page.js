@@ -6,6 +6,11 @@ export default async function Home() {
   const getDataProduct = await axios.get("https://fakestoreapi.com/products");
   const products = getDataProduct.data;
   const sizeImage = 200;
+  const rupiah = 15000;
+  const convertToRupiah = (dollar) => {
+    const priceInRupiah = dollar * rupiah;
+    return priceInRupiah.toLocaleString("id-ID");
+  };
 
   return (
     <>
@@ -39,7 +44,9 @@ export default async function Home() {
                     ? product.title
                     : `${product.title.slice(0, 29)} ...`}
                 </p>
-                <p className="font-medium text-sm">Rp {product.price}</p>
+                <p className="font-medium text-sm">
+                  Rp {convertToRupiah(product.price)}
+                </p>
                 <div className="flex justify-around">
                   <Link
                     href={"/cart"}
