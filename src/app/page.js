@@ -15,10 +15,6 @@ export default async function Home() {
     return priceInRupiah.toLocaleString("id-ID");
   };
 
-  function handleClick() {
-    alert("Hello World");
-  }
-
   return (
     <>
       <title>Home</title>
@@ -30,7 +26,6 @@ export default async function Home() {
         <div className="flex flex-wrap gap-2 justify-around">
           {products.map((product) => (
             <div
-              onClick={handleClick}
               className="w-36 rounded-lg bg-slate-800 overflow-hidden cursor-pointer"
               key={product.id}
             >
