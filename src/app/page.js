@@ -1,8 +1,7 @@
+import querySnapshot from "@/app/firebase";
 import axios from "axios";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
-import { db } from "./firebase";
 
 export default async function Home() {
   const sizeImage = 200;
@@ -12,18 +11,18 @@ export default async function Home() {
     const priceInRupiah = dollar * 15000;
     return priceInRupiah.toLocaleString("id-ID");
   };
-
-  const querySnapshot = await getDocs(collection(db, "rizfan")).then((datas) =>
-    datas.docs.map((doc) => {
-      return { id: doc.id, ...doc.data() };
-    })
-  );
+  const querySnapshots = querySnapshot;
 
   return (
     <>
       <title>Home</title>
-
-      <div className="absolute modalbox">hello world</div>
+      {querySnapshots.map((product) => (
+        <div key={product.id} className="mt-12 modalbox">
+          <p>{product.nama}</p>
+          <p>{product.nohp}</p>
+          <p>{product.email}</p>
+        </div>
+      ))}
 
       <div className="mt-7 mb-14 pt-6 px-3">
         <h1 className="mb-2 py-1 px-3 rounded-md font-bold text-xl bg-slate-800">

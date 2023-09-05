@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+// import { db } from "./firebase";
 
 const firebaseConfig = {
   apiKey: "AIzaSyANsv46AEQIgyUAIBXzOox2hVcwLU_1zrg",
@@ -14,4 +15,12 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-export const db = getFirestore(firebaseApp);
+const db = getFirestore(firebaseApp);
+
+const querySnapshot = await getDocs(collection(db, "rizfan")).then((datas) =>
+  datas.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() };
+  })
+);
+
+export default querySnapshot;
