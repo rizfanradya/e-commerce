@@ -1,5 +1,5 @@
 import axios from "axios";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { db } from "./firebase";
@@ -16,13 +16,18 @@ export default async function Home() {
   const querySnapshot = await getDocs(collection(db, "test"));
   querySnapshot.forEach((doc) => {
     console.log(doc.data());
-    return doc.data();
   });
 
   return (
     <>
       <title>Home</title>
-      <div className="absolute hidden modalbox">Modal Box</div>
+      {querySnapshot.forEach((doc) => (
+        <div key={doc.data().name} className="absolute modalbox">
+          {doc.data().name}
+        </div>
+      ))}
+      <div className="absolute modalbox">Modal Box</div>
+
       <div className="mt-7 mb-14 pt-6 px-3">
         <h1 className="mb-2 py-1 px-3 rounded-md font-bold text-xl bg-slate-800">
           Fake Store API
