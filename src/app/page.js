@@ -13,20 +13,17 @@ export default async function Home() {
     return priceInRupiah.toLocaleString("id-ID");
   };
 
-  const querySnapshot = await getDocs(collection(db, "test"));
-  querySnapshot.forEach((doc) => {
-    console.log(doc.data());
-  });
+  const querySnapshot = await getDocs(collection(db, "rizfan")).then((datas) =>
+    datas.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    })
+  );
 
   return (
     <>
       <title>Home</title>
-      {querySnapshot.forEach((doc) => (
-        <div key={doc.data().name} className="absolute modalbox">
-          {doc.data().name}
-        </div>
-      ))}
-      <div className="absolute modalbox">Modal Box</div>
+
+      <div className="absolute modalbox">hello world</div>
 
       <div className="mt-7 mb-14 pt-6 px-3">
         <h1 className="mb-2 py-1 px-3 rounded-md font-bold text-xl bg-slate-800">
