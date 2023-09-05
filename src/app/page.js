@@ -1,4 +1,4 @@
-import querySnapshot from "@/app/firebase";
+import querySnapshot from "@/db/firebase";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,12 +11,11 @@ export default async function Home() {
     const priceInRupiah = dollar * 15000;
     return priceInRupiah.toLocaleString("id-ID");
   };
-  const querySnapshots = querySnapshot;
 
   return (
     <>
       <title>Home</title>
-      {querySnapshots.map((product) => (
+      {querySnapshot.map((product) => (
         <div key={product.id} className="mt-12 modalbox">
           <p>{product.nama}</p>
           <p>{product.nohp}</p>
