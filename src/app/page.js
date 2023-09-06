@@ -27,7 +27,7 @@ export default async function Home() {
       <title>Home</title>
       {querySnapshot.map((product) => (
         <div key={product.id} className="mt-12 modalbox">
-          <p>test api{product.nama}</p>
+          <p>test api {product.nama}</p>
           <p>{product.nohp}</p>
           <p>{product.email}</p>
         </div>
