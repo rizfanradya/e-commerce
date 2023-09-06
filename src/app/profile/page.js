@@ -46,7 +46,7 @@ export default function ProfilePage() {
           </div>
           <div className="flex flex-col gap-1">
             <h1 className="font-bold text-sm tracking-wide">
-              {userProfile ? userProfile.displayName : "Nama Pengguna"}
+              {userProfile ? userProfile.displayName : "Your Name"}
             </h1>
             <p className="text-xs">Lorem Ipsum Dolor Sit Amet.</p>
           </div>
