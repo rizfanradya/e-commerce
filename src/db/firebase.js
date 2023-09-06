@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -14,6 +15,7 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
 const collectionName = "rizfan";
 
 const querySnapshot = await getDocs(collection(db, collectionName)).then(
@@ -25,9 +27,9 @@ const querySnapshot = await getDocs(collection(db, collectionName)).then(
 
 // try {
 //   const docRef = await addDoc(collection(db, collectionName), {
-//     first: "Ada",
-//     last: "Lovelace",
-//     born: 1815,
+//     nama: "radya",
+//     email: "rizfanradya@gmail.com",
+//     nohp: 88747482005,
 //   });
 //   console.log("Document written with ID: ", docRef.id);
 // } catch (e) {
