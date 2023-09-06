@@ -1,5 +1,5 @@
 import { collection, getDocs, getFirestore } from "firebase/firestore";
-import firebaseApp from "@/db/firebase";
+import firebaseApp from "@/app/firebase";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";

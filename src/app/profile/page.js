@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import firebaseApp from "@/db/firebase";
+import firebaseApp from "@/app/firebase";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
