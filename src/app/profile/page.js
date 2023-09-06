@@ -1,8 +1,34 @@
+"use client";
 import Image from "next/image";
-import LoginGoogleButton from "./loginGoogleButton";
+import firebaseApp from "@/db/firebase";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { useState } from "react";
 
 export default function ProfilePage() {
   const sizeImage = 100;
+  const auth = getAuth(firebaseApp);
+  const provider = new GoogleAuthProvider();
+  const [userProfile, setUserProfile] = useState(null);
+
+  const handleLoginGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+
+        setUserProfile({
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  };
 
   return (
     <>
@@ -12,18 +38,25 @@ export default function ProfilePage() {
           <div className="w-20 h-20 rounded-full overflow-hidden">
             <Image
               className="h-full"
-              src={"/profile.jpg"}
+              src={userProfile ? userProfile.photoURL : "/profile.jpg"}
               alt="profile"
               width={sizeImage}
               height={sizeImage}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <h1 className="font-bold text-sm tracking-wide">Rizfan Radya</h1>
+            <h1 className="font-bold text-sm tracking-wide">
+              {userProfile ? userProfile.displayName : "Nama Pengguna"}
+            </h1>
             <p className="text-xs">Lorem Ipsum Dolor Sit Amet.</p>
           </div>
         </div>
-        <LoginGoogleButton />
+        <button
+          className="text-sky-500 transition border font-medium rounded-full py-2 px-14 hover:bg-sky-500 hover:text-slate-900"
+          onClick={handleLoginGoogle}
+        >
+          Login With Google
+        </button>
       </div>
     </>
   );
