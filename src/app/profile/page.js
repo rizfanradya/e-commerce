@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
-import firebaseApp from "@/app/firebase";
+import firebaseConfig from "@/app/firebase";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 export default function ProfilePage() {
   const sizeImage = 100;
-  const auth = getAuth(firebaseApp);
+  const auth = getAuth(firebaseConfig);
   const provider = new GoogleAuthProvider();
   const [userProfile, setUserProfile] = useState(null);
 
