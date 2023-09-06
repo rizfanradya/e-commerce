@@ -2,7 +2,8 @@
 import Image from "next/image";
 import firebaseApp from "@/db/firebase";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export default function ProfilePage() {
   const sizeImage = 100;
@@ -10,16 +11,30 @@ export default function ProfilePage() {
   const provider = new GoogleAuthProvider();
   const [userProfile, setUserProfile] = useState(null);
 
+  useEffect(() => {
+    const storedUserProfile = Cookies.get("userProfile");
+    if (storedUserProfile) {
+      setUserProfile(JSON.parse(storedUserProfile));
+    }
+  }, []);
+
   const handleLoginGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-
         setUserProfile({
           displayName: user.displayName,
           photoURL: user.photoURL,
+        });
+        const updatedUserProfile = {
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        };
+        setUserProfile(updatedUserProfile);
+        Cookies.set("userProfile", JSON.stringify(updatedUserProfile), {
+          expires: 7,
         });
       })
       .catch((error) => {
@@ -48,7 +63,6 @@ export default function ProfilePage() {
             <h1 className="font-bold text-sm tracking-wide">
               {userProfile ? userProfile.displayName : "Your Name"}
             </h1>
-            <p className="text-xs">Lorem Ipsum Dolor Sit Amet.</p>
           </div>
         </div>
         <button
