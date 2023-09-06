@@ -1,4 +1,5 @@
-import querySnapshot from "@/db/firebase";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import firebaseApp from "@/db/firebase";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +12,15 @@ export default async function Home() {
     const priceInRupiah = dollar * 15000;
     return priceInRupiah.toLocaleString("id-ID");
   };
+
+  const db = getFirestore(firebaseApp);
+  const collectionName = "rizfan";
+  const querySnapshot = await getDocs(collection(db, collectionName)).then(
+    (datas) =>
+      datas.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+      })
+  );
 
   return (
     <>
