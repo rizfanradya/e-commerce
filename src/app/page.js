@@ -35,7 +35,7 @@ export default async function Home() {
 
       <div className="mt-7 mb-14 pt-6 px-3">
         <h1 className="mb-2 py-1 px-3 rounded-md font-bold text-xl bg-slate-800">
-          Fake Store
+          Fake Store API
         </h1>
         <div className="flex flex-wrap gap-2 justify-around">
           {products.map((product) => (
