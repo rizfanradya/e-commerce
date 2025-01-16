@@ -50,7 +50,8 @@ def get_category(limit: int = 10, offset: int = 0, search: Optional[str] = None,
         ) for column in Category.__table__.columns.keys()]  # type: ignore
         ))
     total_data = query.count()
-    query = query.offset(offset).limit(limit).all()  # type: ignore
+    query = query.order_by(Category.id).offset(
+        offset).limit(limit).all()  # type: ignore
     return {
         "total_data": total_data,
         "data": query

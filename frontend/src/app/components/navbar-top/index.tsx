@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Imperial_Script } from "next/font/google";
 import Link from "next/link";
