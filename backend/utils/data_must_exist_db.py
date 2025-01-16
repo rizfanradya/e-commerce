@@ -24,7 +24,7 @@ def data_that_must_exist_in_the_database():
     if not user_admin:
         user_schema = UserSchema(
             email='user@gmail.com',
-            password=hashed_password('@user123'),
+            password=hashed_password('@User123'),
             role_id=role_admin.id,  # type: ignore
         )
         new_user = User(**user_schema.dict())

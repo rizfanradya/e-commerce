@@ -1,9 +1,9 @@
-import Navbar from "@/app/components/navbar";
+import MainLayout from "./main_layout";
 
 export default function Dashboard() {
   return (
-    <Navbar>
-      <div>d</div>
-    </Navbar>
+    <MainLayout>
+      <div></div>
+    </MainLayout>
   );
 }

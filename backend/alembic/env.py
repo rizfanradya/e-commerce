@@ -6,6 +6,8 @@ from utils.database import DATABASE_URL, Base
 
 from models.role import *
 from models.user import *
+from models.item import *
+from models.category import *
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -20,9 +20,17 @@ const listItem = [
   },
 ];
 
-export default function Navbar({ children }: { children: ReactNode }) {
+export default function Navbar({
+  children,
+  bg,
+}: {
+  children: ReactNode;
+  bg?: string;
+}) {
   return (
-    <div className="relative w-full max-w-md pt-4 m-auto bg-gray-200">
+    <div
+      className={`relative w-full max-w-md pt-4 m-auto ${bg} bg-cover bg-center bg-no-repeat`}
+    >
       <div className="px-4">
         <NavbarTop listItem={listItem} />
         <div className="mt-4">{children}</div>
