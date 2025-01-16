@@ -1,0 +1,27 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:backend": "cd backend && python app.py",
+    "start:frontend": "cd frontend && npx next dev --turbopack",
+    "start": "npm-run-all --parallel start:backend start:frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rizfanradya/e-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rizfanradya/e-commerce/issues"
+  },
+  "homepage": "https://github.com/rizfanradya/e-commerce#readme",
+  "description": "",
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

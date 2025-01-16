@@ -22,7 +22,7 @@ const listItem = [
 
 export default function Navbar({ children }: { children: ReactNode }) {
   return (
-    <div className="relative w-full h-screen max-w-md pt-4 m-auto bg-gray-200">
+    <div className="relative w-full max-w-md pt-4 m-auto bg-gray-200">
       <div className="px-4">
         <NavbarTop listItem={listItem} />
         <div className="mt-4">{children}</div>
