@@ -67,10 +67,20 @@ async def create_item(
 
 
 @router.get('/item', response_model=ItemResponseSchema)
-def get_item(limit: int = 10, offset: int = 0, search: Optional[str] = None, id: Optional[int] = None, db: Session = Depends(get_db), token: str = Depends(TokenAuthorization)):
+def get_item(
+    limit: int = 10,
+    offset: int = 0,
+    search: Optional[str] = None,
+    id: Optional[int] = None,
+    category_id: Optional[int] = None,
+    db: Session = Depends(get_db),
+    token: str = Depends(TokenAuthorization)
+):
     query = db.query(Item)
     if id:
         query = query.where(Item.id == id)
+    if category_id:
+        query = query.where(Item.category_id == category_id)
     if search:
         query = query.filter(or_(*[getattr(Item, column).ilike(
             f"%{search}%"

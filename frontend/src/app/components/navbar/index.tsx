@@ -34,11 +34,15 @@ export default function Navbar({
   } else {
     return (
       <div
-        className={`relative w-full max-w-md pt-4 m-auto ${bg} bg-cover bg-center bg-no-repeat`}
+        className={`relative w-full max-w-md pt-4 m-auto ${bg} bg-cover bg-center bg-no-repeat h-screen overflow-auto`}
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
       >
         <div className="px-4">
           <NavbarTop listItem={listItem} />
-          <div className="mt-4">{children}</div>
+          <div className="mt-4 mb-28">{children}</div>
         </div>
 
         <NavbarBottom listItem={listItem} />
