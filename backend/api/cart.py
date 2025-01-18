@@ -4,8 +4,9 @@ from utils.database import get_db
 from utils.auth import TokenAuthorization
 from utils.error_response import send_error_response
 from typing import Optional
-from sqlalchemy import or_
+from sqlalchemy import or_, func
 from models.cart import Cart
+from models.item import Item
 from schemas.cart import CartSchema, CartResponseSchema
 
 router = APIRouter()
@@ -56,6 +57,14 @@ def update_cart(id: int, cart: CartSchema, db: Session = Depends(get_db), token:
 @router.get('/cart', response_model=CartResponseSchema)
 def get_cart(user_id: int, limit: int = 10, offset: int = 0, search: Optional[str] = None, id: Optional[int] = None, db: Session = Depends(get_db), token: str = Depends(TokenAuthorization)):
     query = db.query(Cart).where(Cart.user_id == user_id)
+
+    total_payment = db.query(
+        func.sum(Item.price * Cart.quantity)
+    ).select_from(Cart).join(Item, Cart.item_id == Item.id)
+    total_payment = total_payment.where(
+        Cart.user_id == user_id, Cart.status == False
+    ).scalar() or 0
+
     if id:
         query = query.where(Cart.id == id)
     if search:
@@ -63,12 +72,14 @@ def get_cart(user_id: int, limit: int = 10, offset: int = 0, search: Optional[st
             f"%{search}%"
         ) for column in Cart.__table__.columns.keys()]  # type: ignore
         ))
+
     total_data = query.count()
     query = query.order_by(Cart.id).offset(
         offset).limit(limit).all()  # type: ignore
+
     return {
         "total_data": total_data,
-        ""
+        "total_payment": total_payment,
         "data": query
     }
 

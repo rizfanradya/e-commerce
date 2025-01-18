@@ -20,6 +20,7 @@ class BaseSchema(CartSchema):
 
 class CartResponseSchema(BaseModel):
     total_data: int
+    total_payment: int
     data: List[BaseSchema]
 
     class Config:

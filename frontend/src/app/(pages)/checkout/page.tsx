@@ -12,9 +12,11 @@ import { IoIosArrowBack } from "react-icons/io";
 
 export default function Checkout() {
   const [data, setData] = useState<any[]>([]);
+  const [totalPayment, setTotalPayment] = useState(0);
   const [loading, setLoading] = useState(true);
   const limit = 1000000;
   const offset = 0;
+  const totalPostage = 10000;
 
   useEffect(() => {
     (async () => {
@@ -24,6 +26,7 @@ export default function Checkout() {
           `/cart?limit=${limit}&offset=${offset}&user_id=${DECODE_TOKEN?.id}`
         );
         setData(cart.data.data);
+        setTotalPayment(cart.data.total_payment + totalPostage);
       } catch (error: any) {
         console.log(error);
       } finally {
@@ -120,11 +123,11 @@ export default function Checkout() {
           <table>
             <tr>
               <td>Biaya penanganan dan biaya ongkir</td>
-              <td>Rp. 10.000</td>
+              <td>Rp. {totalPostage.toLocaleString()}</td>
             </tr>
             <tr>
               <td>Total pembayaran</td>
-              <td>Rp. 760.000</td>
+              <td>Rp. {totalPayment.toLocaleString()}</td>
             </tr>
             <tr>
               <td>Nomor pengiriman</td>
