@@ -21,7 +21,10 @@ def create_cart(cart: CartSchema, db: Session = Depends(get_db), token: str = De
         ).first()
 
         if cart_old:
-            cart_old.quantity += cart.quantity
+            if cart_old.quantity <= 1 and cart.quantity == -1:
+                cart_old.quantity = 1
+            else:
+                cart_old.quantity += cart.quantity
             db.commit()
             return cart_old
         else:

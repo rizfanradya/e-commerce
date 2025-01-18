@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import List
-from .item import ItemSchema
+from .item import BaseSchema as ItemSchema
 
 
 class CartSchema(BaseModel):
