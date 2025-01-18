@@ -16,7 +16,7 @@ const listItem = [
     icon: <IoNotifications size={22} />,
   },
   {
-    href: "/profile",
+    href: "/",
     name: "Profile",
     icon: <FaUserCircle size={22} />,
   },
