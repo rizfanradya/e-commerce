@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List
+from .item import ItemSchema
 
 
 class CartSchema(BaseModel):
@@ -11,6 +12,7 @@ class CartSchema(BaseModel):
 
 class BaseSchema(CartSchema):
     id: int
+    item: ItemSchema
 
     class Config:
         from_attributes = True
