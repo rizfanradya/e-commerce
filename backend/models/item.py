@@ -14,3 +14,4 @@ class Item(Base):
     image = Column(String(length=255))
     category_id = Column(Integer, ForeignKey('category.id'), nullable=False)
     category = relationship('Category', back_populates='item')
+    cart = relationship('Cart', back_populates='item')

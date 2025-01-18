@@ -13,3 +13,4 @@ class User(Base):
     password = Column(String(length=300), nullable=False)
     role_id = Column(Integer, ForeignKey('role.id'), nullable=False)
     role = relationship('Role', back_populates='user')
+    cart = relationship('Cart', back_populates='user')

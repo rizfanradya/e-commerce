@@ -8,6 +8,7 @@ from models.role import *
 from models.user import *
 from models.item import *
 from models.category import *
+from models.cart import *
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

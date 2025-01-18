@@ -4,8 +4,9 @@ import Auth from "@/app/components/auth";
 import LoadingSpinner from "@/app/components/loading";
 import Navbar from "@/app/components/navbar";
 import axiosInstance from "@/utils/axiosInstance";
-import { backendFastApi } from "@/utils/constant";
+import { backendFastApi, DECODE_TOKEN } from "@/utils/constant";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 
@@ -14,6 +15,7 @@ export default function Dashboard() {
   const [filter, setFilter] = useState<any[]>([]);
   const [updFilter, setUpdFilter] = useState<number>(0);
   const [data, setData] = useState<any[]>([]);
+  const router = useRouter();
   const limit = 1000000;
   const offset = 0;
 
@@ -38,6 +40,19 @@ export default function Dashboard() {
       }
     })();
   }, [updFilter]);
+
+  async function addToCart(item_id: number) {
+    try {
+      await axiosInstance.post("/cart", {
+        item_id,
+        user_id: DECODE_TOKEN?.id,
+        status: false,
+        quantity: 1,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Auth>
@@ -103,8 +118,15 @@ export default function Dashboard() {
                     size={34}
                     color="#ad3d3d"
                     className="cursor-pointer"
+                    onClick={() => addToCart(doc.id)}
                   />
-                  <button className="bg-[#ad3d3d] text-white font-bold text-xs w-full p-2 rounded-md">
+                  <button
+                    className="bg-[#ad3d3d] text-white font-bold text-xs w-full p-2 rounded-md"
+                    onClick={async () => {
+                      await addToCart(doc.id);
+                      router.push("/cart");
+                    }}
+                  >
                     Pesan Sekarang
                   </button>
                 </div>

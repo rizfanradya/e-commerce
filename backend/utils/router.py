@@ -4,12 +4,14 @@ import api.auth as auth
 import api.role as role
 import api.item as item
 import api.category as category
+import api.cart as cart
 
 routers = [
     (auth.router, "Auth API", "/api"),
     (role.router, "Role API", "/api"),
     (user.router, "User API", "/api"),
     (item.router, "Item API", "/api"),
+    (cart.router, "Cart API", "/api"),
     (category.router, "Category API", "/api"),
 ]
 
