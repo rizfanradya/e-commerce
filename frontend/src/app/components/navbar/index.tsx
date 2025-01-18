@@ -5,13 +5,13 @@ import NavbarBottom from "../navbar-bottom";
 import { FaHome, FaUserCircle } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
 import { IoNotifications } from "react-icons/io5";
-import { ACCESS_TOKEN } from "@/utils/constant";
+import Auth from "../auth";
 
 const listItem = [
   { href: "/", name: "Dashboard", icon: <FaHome size={20} /> },
   { href: "/cart", name: "Cart", icon: <BsCart4 size={22} /> },
   {
-    href: "/notification",
+    href: "/",
     name: "Notification",
     icon: <IoNotifications size={22} />,
   },
@@ -29,10 +29,8 @@ export default function Navbar({
   children: ReactNode;
   bg?: string;
 }) {
-  if (!ACCESS_TOKEN) {
-    window.location.href = "/login";
-  } else {
-    return (
+  return (
+    <Auth>
       <div
         className={`relative w-full max-w-md pt-4 m-auto ${bg} bg-cover bg-center bg-no-repeat h-screen overflow-auto`}
         style={{
@@ -47,6 +45,6 @@ export default function Navbar({
 
         <NavbarBottom listItem={listItem} />
       </div>
-    );
-  }
+    </Auth>
+  );
 }
