@@ -54,7 +54,13 @@ export default function Cart() {
 
   return (
     <Auth>
-      <div className="relative w-full max-w-md pt-4 m-auto bg-[url('/cart_bg.jpeg')] bg-cover bg-center bg-no-repeat h-screen overflow-auto">
+      <div
+        className="relative w-full max-w-md pt-4 m-auto bg-[url('/cart_bg.jpeg')] bg-cover bg-center bg-no-repeat h-screen overflow-auto"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
         <div className="flex justify-between px-4 py-2 font-bold text-white">
           <Link href={"/"}>
             <IoIosArrowBack size={50} />
