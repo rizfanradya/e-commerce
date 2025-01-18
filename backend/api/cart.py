@@ -54,8 +54,8 @@ def update_cart(id: int, cart: CartSchema, db: Session = Depends(get_db), token:
 
 
 @router.get('/cart', response_model=CartResponseSchema)
-def get_cart(limit: int = 10, offset: int = 0, search: Optional[str] = None, id: Optional[int] = None, db: Session = Depends(get_db), token: str = Depends(TokenAuthorization)):
-    query = db.query(Cart)
+def get_cart(user_id: int, limit: int = 10, offset: int = 0, search: Optional[str] = None, id: Optional[int] = None, db: Session = Depends(get_db), token: str = Depends(TokenAuthorization)):
+    query = db.query(Cart).where(Cart.user_id == user_id)
     if id:
         query = query.where(Cart.id == id)
     if search:
@@ -68,6 +68,7 @@ def get_cart(limit: int = 10, offset: int = 0, search: Optional[str] = None, id:
         offset).limit(limit).all()  # type: ignore
     return {
         "total_data": total_data,
+        ""
         "data": query
     }
 

@@ -1,9 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import Auth from "@/app/components/auth";
+import LoadingSpinner from "@/app/components/loading";
+import axiosInstance from "@/utils/axiosInstance";
+import { backendFastApi, DECODE_TOKEN } from "@/utils/constant";
+import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { BiMessageDetail } from "react-icons/bi";
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function Checkout() {
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const limit = 1000000;
+  const offset = 0;
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      try {
+        const cart = await axiosInstance.get(
+          `/cart?limit=${limit}&offset=${offset}&user_id=${DECODE_TOKEN?.id}`
+        );
+        setData(cart.data.data);
+      } catch (error: any) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
   return (
     <Auth>
       <div
@@ -41,6 +69,41 @@ export default function Checkout() {
         <div className="flex flex-col gap-1 px-6 mt-4">
           <h1 className="font-bold">Rincian Pembayaran</h1>
 
+          {loading ? (
+            <LoadingSpinner fullScreen={false} />
+          ) : (
+            <div className="flex flex-col gap-3">
+              {data
+                .filter((doc) => !doc.status)
+                .map((doc) => (
+                  <div key={doc.id} className="flex items-center gap-2">
+                    <div className="flex items-center justify-center h-24 overflow-hidden rounded-md w-28">
+                      <Image
+                        alt=""
+                        src={`${backendFastApi}/image/${doc.item.image}`}
+                        width={100}
+                        height={100}
+                      />
+                    </div>
+
+                    <div className="flex flex-col w-full gap-1 capitalize">
+                      <p>{doc.item.name}</p>
+                      <div className="flex items-center justify-between w-full">
+                        <p>Rp. {doc.item.price.toLocaleString()}</p>
+                        <p>
+                          Rp. {(doc.item.price * doc.quantity).toLocaleString()}
+                        </p>
+                      </div>
+                      <p>
+                        <span className="text-[10px]">x</span>
+                        {doc.quantity}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
+
           <div className="bg-[#C77373] w-max rounded-2xl font-bold px-6 py-1 text-sm text-white cursor-pointer">
             Catatan
           </div>
@@ -54,18 +117,6 @@ export default function Checkout() {
         </div>
 
         <div className="px-6 mt-4">
-          {/* <div>
-            <p>Biaya penanganan dan biaya ongkir</p>
-            <p>Total pembayaran</p>
-            <p>Nomor pengiriman</p>
-          </div>
-
-          <div>
-            <p>Rp. 10.000</p>
-            <p>Rp. 760.000</p>
-            <p>J&TE83HJ6BN</p>
-          </div> */}
-
           <table>
             <tr>
               <td>Biaya penanganan dan biaya ongkir</td>

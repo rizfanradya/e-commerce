@@ -25,7 +25,7 @@ export default function Cart() {
       setLoading(true);
       try {
         const cart = await axiosInstance.get(
-          `/cart?limit=${limit}&offset=${offset}`
+          `/cart?limit=${limit}&offset=${offset}&user_id=${DECODE_TOKEN?.id}`
         );
         setData(cart.data.data);
       } catch (error: any) {
